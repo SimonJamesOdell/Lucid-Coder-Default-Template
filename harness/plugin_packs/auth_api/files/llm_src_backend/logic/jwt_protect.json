@@ -1,0 +1,9 @@
+{
+  "id": "logic_jwt_protect",
+  "type": "logic",
+  "description": "Express middleware to require valid JWT for protected endpoints.",
+  "inputs": ["token"],
+  "outputs": ["user"],
+  "implementation": "Use jsonwebtoken to verify token from Authorization header. Attach user to req if valid, else 401.",
+  "llm_notes": "Apply to any endpoint that needs authentication."
+}

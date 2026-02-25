@@ -1,0 +1,18 @@
+{
+  "id": "contract_storage",
+  "type": "contract",
+  "description": "Canonical storage contract for generic content resources.",
+  "list_content": {
+    "method": "GET",
+    "route": "/api/content",
+    "inputs": [],
+    "outputs": ["items"]
+  },
+  "create_content": {
+    "method": "POST",
+    "route": "/api/content",
+    "inputs": ["title", "body"],
+    "outputs": ["item"]
+  },
+  "llm_notes": "Use this as base storage contract; specialize per product domain."
+}

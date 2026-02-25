@@ -1,0 +1,47 @@
+{
+  "id": "llm_invariants",
+  "description": "Canonical invariants for frontend/backend contract safety in the LLM-optimized workspace.",
+  "requires_guidelines": true,
+  "frontend": {
+    "manifest_path": "llm_src/manifest.json",
+    "required_manifest_ids": {
+      "contracts": ["contract_auth"],
+      "components": ["component_App", "component_LoginForm", "component_SignupForm"],
+      "routes": ["route_Home"]
+    }
+  },
+  "backend": {
+    "manifest_path": "llm_src_backend/manifest.json",
+    "optional": true,
+    "required_manifest_ids": {
+      "endpoints": ["endpoint_login", "endpoint_signup"],
+      "logic": ["logic_login_db", "logic_signup_db", "logic_jwt_protect"],
+      "security": ["security_policy"]
+    }
+  },
+  "contracts": {
+    "auth": {
+      "optional": true,
+      "path": "llm_src/contracts/auth.json",
+      "backend_endpoint_dir": "llm_src_backend/endpoints",
+      "operations": ["login", "signup"],
+      "compare_fields": ["method", "route", "inputs", "outputs"]
+    }
+  },
+  "endpoint_security": {
+    "default": "secure",
+    "require_jwt_logic": "logic_jwt_protect",
+    "require_hash_logic": "logic_password_hash",
+    "require_token_logic": "logic_jwt_auth",
+    "public_flag": "public",
+    "require_explicit_public_flag": true,
+    "backend_endpoint_dir": "llm_src_backend/endpoints"
+  },
+  "security_policy": {
+    "path": "llm_src_backend/security.json",
+    "required_keys": ["jwt", "cors", "rate_limit"],
+    "required_jwt_keys": ["secret_env", "expires_in", "issuer"],
+    "require_cors_allowlist": true
+  },
+  "llm_notes": "Build must fail on any invariant violation. All endpoints must be secure (JWT protected) unless explicitly marked public:true. This file is intentionally explicit for smaller models (GPT-4.1 / GPT-oss-120b)."
+}

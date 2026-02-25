@@ -1,0 +1,9 @@
+{
+  "id": "logic_events_bus",
+  "type": "logic",
+  "description": "Realtime event bus logic for publish and poll workflows.",
+  "inputs": ["action", "channel", "event", "cursor", "user"],
+  "outputs": ["accepted", "events", "cursor"],
+  "implementation": "Persist and retrieve channel-scoped events with cursor pagination and auth scope checks.",
+  "llm_notes": "Prevent cross-tenant event leakage; enforce per-user channel authorization."
+}

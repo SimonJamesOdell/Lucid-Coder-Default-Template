@@ -1,0 +1,42 @@
+{
+  "description": "Harness-owned capability detection and phase gates. This file is authoritative for conditional test/build execution.",
+  "capabilities": {
+    "backend_api": {
+      "type": "manifest_array_non_empty",
+      "path": "llm_src_backend/manifest.json",
+      "field": "endpoints"
+    },
+    "auth_api": {
+      "type": "auth_contract_operations",
+      "path": "llm_src/contracts/auth.json",
+      "operations": ["login", "signup"]
+    }
+  },
+  "phases": {
+    "dev": [
+      { "command": "node validate_llm_invariants.cjs", "cache_scope": "global" },
+      { "command": "node build_llm_backend.cjs", "when": "backend_api", "changed_in": ["backend"], "cache_scope": "backend" },
+      { "command": "node build_llm_bundle.cjs", "changed_in": ["frontend", "backend"], "cache_scope": "global" },
+      { "command": "node validate_backend_runtime.cjs", "when": "backend_api", "changed_in": ["backend"], "env_flag": "HARNESS_DEV_STRICT" },
+      { "command": "node test_backend_smoke.cjs", "when": "backend_api", "changed_in": ["backend"], "env_flag": "HARNESS_DEV_STRICT" },
+      { "command": "node test_backend_security.cjs", "when": "auth_api", "changed_in": ["backend"], "env_flag": "HARNESS_DEV_STRICT" }
+    ],
+    "build_llm": [
+      { "command": "node validate_llm_invariants.cjs" },
+      { "command": "node build_llm_backend.cjs", "when": "backend_api" },
+      { "command": "node build_llm_bundle.cjs" }
+    ],
+    "test": [
+      { "command": "node validate_llm_invariants.cjs" },
+      { "command": "node validate_backend_runtime.cjs", "when": "backend_api" },
+      { "command": "node test_backend_smoke.cjs", "when": "backend_api" },
+      { "command": "node test_backend_security.cjs", "when": "auth_api" }
+    ],
+    "release": [
+      { "command": "node harness/run_harness_gates.cjs build_llm" },
+      { "command": "node harness/run_harness_gates.cjs test" },
+      { "command": "npm run build" },
+      { "command": "npm audit --omit=dev" }
+    ]
+  }
+}

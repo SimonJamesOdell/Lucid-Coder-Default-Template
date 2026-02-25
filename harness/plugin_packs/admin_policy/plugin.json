@@ -1,0 +1,39 @@
+{
+  "id": "admin_policy",
+  "name": "Admin Policy",
+  "risk": "high",
+  "description": "Adds role-based admin authorization policy and admin endpoint scaffolding.",
+  "dependencies": ["core", "backend_api", "auth_api"],
+  "files": [
+    { "from": "llm_src/contracts/admin.json", "to": "llm_src/contracts/admin.json" },
+    { "from": "llm_src_backend/endpoints/admin_list_users.json", "to": "llm_src_backend/endpoints/admin_list_users.json" },
+    { "from": "llm_src_backend/logic/rbac_policy.json", "to": "llm_src_backend/logic/rbac_policy.json" },
+    { "from": "llm_src_backend/logic/admin_audit_log.json", "to": "llm_src_backend/logic/admin_audit_log.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/admin.json",
+    "llm_src_backend/endpoints/admin_list_users.json",
+    "llm_src_backend/logic/rbac_policy.json",
+    "llm_src_backend/logic/admin_audit_log.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_admin"],
+      "remove": ["contract_admin"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_admin_list_users"],
+      "remove": ["endpoint_admin_list_users"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_rbac_policy", "logic_admin_audit_log"],
+      "remove": ["logic_rbac_policy", "logic_admin_audit_log"]
+    }
+  ]
+}

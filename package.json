@@ -1,0 +1,44 @@
+{
+  "name": "jltlife",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "validate:llm": "node validate_llm_invariants.cjs",
+    "build:llm": "node harness/run_harness_gates.cjs build_llm",
+    "test": "node harness/run_harness_gates.cjs test",
+    "dev:check": "node harness/run_harness_gates.cjs dev",
+    "dev:check:strict": "node harness/run_harness_gates.cjs dev --strict",
+    "test:backend": "node validate_backend_runtime.cjs",
+    "test:smoke:backend": "node test_backend_smoke.cjs",
+    "test:security:backend": "node test_backend_security.cjs",
+    "harness:detect": "node harness/run_harness_gates.cjs detect",
+    "release:assure": "node harness/run_harness_gates.cjs release",
+    "plugin:list": "node harness/plugin_manager.cjs list",
+    "plugin:status": "node harness/plugin_manager.cjs status",
+    "plugin:plan": "node harness/plugin_manager.cjs plan",
+    "plugin:apply-plan": "node harness/plugin_manager.cjs apply-plan",
+    "plugin:enable": "node harness/plugin_manager.cjs enable",
+    "plugin:disable": "node harness/plugin_manager.cjs disable",
+    "template:doctor": "node harness/template_doctor.cjs",
+    "template:doctor:deep": "node harness/template_doctor.cjs --deep",
+    "preview": "vite preview",
+    "start": "vite --host 0.0.0.0 --port 5201",
+    "backend": "nodemon backend_dist/server.cjs",
+    "backend:build": "node build_llm_backend.cjs",
+    "backend:start": "node backend_dist/server.cjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3"
+  }
+}

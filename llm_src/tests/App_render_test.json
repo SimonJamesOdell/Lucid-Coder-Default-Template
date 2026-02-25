@@ -1,0 +1,11 @@
+{
+  "id": "test_App_render",
+  "type": "unit",
+  "target": "component_App",
+  "description": "Test that the App component renders without errors.",
+  "input": {},
+  "expected_output": {
+    "renders": true
+  },
+  "llm_notes": "Extend with more detailed render checks as needed."
+}

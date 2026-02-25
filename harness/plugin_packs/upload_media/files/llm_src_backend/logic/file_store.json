@@ -1,0 +1,9 @@
+{
+  "id": "logic_file_store",
+  "type": "logic",
+  "description": "Stores media file and metadata with ownership association.",
+  "inputs": ["filename", "mimeType", "bytesBase64", "user"],
+  "outputs": ["asset"],
+  "implementation": "Persist file in managed storage and write metadata to MediaAsset model.",
+  "llm_notes": "Prefer signed URL retrieval for client access."
+}

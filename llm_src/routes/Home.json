@@ -1,0 +1,19 @@
+{
+  "id": "route_Home",
+  "type": "route",
+  "name": "Home",
+  "description": "Landing page showing activity feed and navigation.",
+  "components": ["component_NavBar", "component_ActivityFeed"],
+  "logic_refs": [],
+  "tests": [
+    {
+      "id": "test_Home_render",
+      "type": "unit",
+      "description": "Test that Home route renders NavBar and ActivityFeed.",
+      "input": {},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for routing checks."
+    }
+  ],
+  "llm_notes": "Add more components as needed."
+}

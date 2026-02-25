@@ -1,0 +1,9 @@
+{
+  "id": "logic_payments_webhook_verify",
+  "type": "logic",
+  "description": "Validates payment webhook signatures and payload integrity.",
+  "inputs": ["providerPayload", "signature"],
+  "outputs": ["valid", "event"],
+  "implementation": "Verify provider signature with webhook secret and parse trusted event payload.",
+  "llm_notes": "Fail closed: reject on any signature verification failure."
+}

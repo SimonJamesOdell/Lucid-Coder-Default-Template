@@ -1,0 +1,19 @@
+{
+  "id": "route_Profile",
+  "type": "route",
+  "name": "Profile",
+  "description": "User profile page.",
+  "components": ["component_NavBar", "component_UserProfile"],
+  "logic_refs": [],
+  "tests": [
+    {
+      "id": "test_Profile_render",
+      "type": "unit",
+      "description": "Test that Profile route renders NavBar and UserProfile.",
+      "input": {},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for routing checks."
+    }
+  ],
+  "llm_notes": "Add more components as needed."
+}

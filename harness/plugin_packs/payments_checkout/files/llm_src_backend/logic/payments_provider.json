@@ -1,0 +1,9 @@
+{
+  "id": "logic_payments_provider",
+  "type": "logic",
+  "description": "Payment provider integration logic for intent creation and settlement updates.",
+  "inputs": ["action", "payload", "user"],
+  "outputs": ["clientSecret", "intentId", "accepted"],
+  "implementation": "Create intents via provider SDK/API and reconcile payment status after verified webhooks.",
+  "llm_notes": "Use provider secret from env; never expose secret keys to client."
+}

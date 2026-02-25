@@ -1,0 +1,39 @@
+{
+  "id": "realtime_events",
+  "name": "Realtime Events",
+  "risk": "high",
+  "description": "Adds realtime event publish/subscribe contracts and secured backend endpoints.",
+  "dependencies": ["core", "backend_api", "auth_api"],
+  "files": [
+    { "from": "llm_src/contracts/realtime.json", "to": "llm_src/contracts/realtime.json" },
+    { "from": "llm_src_backend/endpoints/events_publish.json", "to": "llm_src_backend/endpoints/events_publish.json" },
+    { "from": "llm_src_backend/endpoints/events_poll.json", "to": "llm_src_backend/endpoints/events_poll.json" },
+    { "from": "llm_src_backend/logic/events_bus.json", "to": "llm_src_backend/logic/events_bus.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/realtime.json",
+    "llm_src_backend/endpoints/events_publish.json",
+    "llm_src_backend/endpoints/events_poll.json",
+    "llm_src_backend/logic/events_bus.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_realtime"],
+      "remove": ["contract_realtime"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_events_publish", "endpoint_events_poll"],
+      "remove": ["endpoint_events_publish", "endpoint_events_poll"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_events_bus"],
+      "remove": ["logic_events_bus"]
+    }
+  ]
+}

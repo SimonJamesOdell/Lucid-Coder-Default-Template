@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_upload_media",
+  "type": "endpoint",
+  "name": "upload_media",
+  "description": "POST endpoint for authenticated media uploads.",
+  "route": "/api/media/upload",
+  "method": "POST",
+  "inputs": ["filename", "mimeType", "bytesBase64"],
+  "outputs": ["asset"],
+  "logic_refs": ["logic_file_upload_policy", "logic_file_store", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Validate mime type, file size, and scan policy before persistence."
+}

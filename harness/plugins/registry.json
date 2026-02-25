@@ -1,0 +1,45 @@
+{
+  "description": "Harness plugin registry for agent-managed capability packs.",
+  "plugins": [
+    {
+      "id": "core",
+      "manifest": "harness/plugin_packs/core/plugin.json",
+      "default_active": true
+    },
+    {
+      "id": "backend_api",
+      "manifest": "harness/plugin_packs/backend_api/plugin.json",
+      "default_active": true
+    },
+    {
+      "id": "auth_api",
+      "manifest": "harness/plugin_packs/auth_api/plugin.json",
+      "default_active": true
+    },
+    {
+      "id": "storage_api",
+      "manifest": "harness/plugin_packs/storage_api/plugin.json",
+      "default_active": false
+    },
+    {
+      "id": "upload_media",
+      "manifest": "harness/plugin_packs/upload_media/plugin.json",
+      "default_active": false
+    },
+    {
+      "id": "realtime_events",
+      "manifest": "harness/plugin_packs/realtime_events/plugin.json",
+      "default_active": false
+    },
+    {
+      "id": "payments_checkout",
+      "manifest": "harness/plugin_packs/payments_checkout/plugin.json",
+      "default_active": false
+    },
+    {
+      "id": "admin_policy",
+      "manifest": "harness/plugin_packs/admin_policy/plugin.json",
+      "default_active": false
+    }
+  ]
+}

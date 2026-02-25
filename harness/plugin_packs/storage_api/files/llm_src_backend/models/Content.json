@@ -1,0 +1,13 @@
+{
+  "id": "model_Content",
+  "type": "model",
+  "description": "Generic content model for persisted user-owned records.",
+  "fields": [
+    {"name": "id", "type": "string", "primary": true},
+    {"name": "ownerId", "type": "string", "index": true},
+    {"name": "title", "type": "string"},
+    {"name": "body", "type": "string"},
+    {"name": "createdAt", "type": "string"}
+  ],
+  "llm_notes": "Customize fields for specific product types."
+}

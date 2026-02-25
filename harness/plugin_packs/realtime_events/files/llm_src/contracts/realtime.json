@@ -1,0 +1,18 @@
+{
+  "id": "contract_realtime",
+  "type": "contract",
+  "description": "Canonical realtime event contract.",
+  "publish_event": {
+    "method": "POST",
+    "route": "/api/events/publish",
+    "inputs": ["channel", "eventType", "payload"],
+    "outputs": ["accepted"]
+  },
+  "poll_events": {
+    "method": "GET",
+    "route": "/api/events/poll",
+    "inputs": ["channel", "cursor"],
+    "outputs": ["events", "cursor"]
+  },
+  "llm_notes": "Use auth-scoped channels; avoid unauthenticated broadcast access."
+}

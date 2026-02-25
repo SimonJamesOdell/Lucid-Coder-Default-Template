@@ -1,0 +1,12 @@
+{
+  "id": "contract_upload",
+  "type": "contract",
+  "description": "Canonical media upload contract.",
+  "upload_media": {
+    "method": "POST",
+    "route": "/api/media/upload",
+    "inputs": ["filename", "mimeType", "bytesBase64"],
+    "outputs": ["asset"]
+  },
+  "llm_notes": "Do not accept arbitrary mime types; enforce allowlist in upload policy logic."
+}

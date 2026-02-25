@@ -1,0 +1,21 @@
+{
+  "id": "component_NavBar",
+  "type": "component",
+  "name": "NavBar",
+  "description": "Navigation bar for main routes.",
+  "props": ["links"],
+  "children": [],
+  "logic_refs": [],
+  "style_refs": [],
+  "tests": [
+    {
+      "id": "test_NavBar_render",
+      "type": "unit",
+      "description": "Test that NavBar displays navigation links.",
+      "input": {"links": ["Home", "Groups", "Events", "Profile"]},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for click handling."
+    }
+  ],
+  "llm_notes": "Add responsive styles and logic as needed."
+}

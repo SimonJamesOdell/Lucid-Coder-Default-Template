@@ -1,0 +1,21 @@
+{
+  "id": "component_TestResults",
+  "type": "component",
+  "name": "TestResults",
+  "description": "Displays test results and status for the web app.",
+  "props": ["results"],
+  "children": [],
+  "logic_refs": [],
+  "style_refs": [],
+  "tests": [
+    {
+      "id": "test_TestResults_display",
+      "type": "unit",
+      "description": "Test that TestResults component displays results correctly.",
+      "input": {"results": [{"id": "test_App_render", "status": "pass"}]},
+      "expected_output": {"displays": true},
+      "llm_notes": "Extend for more detailed result display checks."
+    }
+  ],
+  "llm_notes": "Update to show all test outcomes visually."
+}

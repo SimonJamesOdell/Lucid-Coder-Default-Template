@@ -1,0 +1,21 @@
+{
+  "id": "component_LandingPage",
+  "type": "component",
+  "name": "LandingPage",
+  "description": "Landing page with centered auth modal and three columns.",
+  "props": [],
+  "children": ["component_SocialLogins", "component_LoginForm", "component_SignupForm"],
+  "logic_refs": [],
+  "style_refs": ["style_LandingPage"],
+  "tests": [
+    {
+      "id": "test_LandingPage_render",
+      "type": "unit",
+      "description": "LandingPage renders login and signup forms.",
+      "input": {},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for form validation and routing checks."
+    }
+  ],
+  "llm_notes": "Layout: 3 columns in modal (image, social logins, tabbed login/sign-up)."
+}

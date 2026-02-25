@@ -1,0 +1,12 @@
+{
+  "id": "model_User",
+  "type": "model",
+  "description": "User account schema for authentication and profile.",
+  "fields": [
+    {"name": "id", "type": "string", "primary": true},
+    {"name": "email", "type": "string", "unique": true},
+    {"name": "password", "type": "string"},
+    {"name": "name", "type": "string"}
+  ],
+  "llm_notes": "Add more fields as needed for profile, preferences, etc."
+}

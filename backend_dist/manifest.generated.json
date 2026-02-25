@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-02-25T22:55:20.688Z",
+  "source": {
+    "backend_manifest": "llm_src_backend/manifest.json",
+    "endpoint_dir": "llm_src_backend/endpoints",
+    "security_policy": "llm_src_backend/security.json"
+  },
+  "middleware": {
+    "helmet": true,
+    "cors_allowlist_env": "CORS_ORIGINS",
+    "rate_limit": {
+      "window_ms": 60000,
+      "max_requests": 20,
+      "auth_max_requests": 10
+    },
+    "jwt_secret_env": "JWT_SECRET",
+    "jwt_expires_in": "1h",
+    "jwt_issuer": "smallGPT-api"
+  },
+  "entities": {
+    "manifest_endpoint_ids": [
+      "endpoint_login",
+      "endpoint_signup"
+    ],
+    "endpoint_count": 2
+  },
+  "endpoints": [
+    {
+      "id": "endpoint_login",
+      "name": "login",
+      "route": "/api/login",
+      "method": "POST",
+      "public": true,
+      "inputs": [
+        "email",
+        "password"
+      ],
+      "outputs": [
+        "token",
+        "user"
+      ],
+      "logic_refs": [
+        "logic_login_db",
+        "logic_password_hash",
+        "logic_jwt_auth"
+      ]
+    },
+    {
+      "id": "endpoint_signup",
+      "name": "signup",
+      "route": "/api/signup",
+      "method": "POST",
+      "public": true,
+      "inputs": [
+        "email",
+        "password",
+        "name"
+      ],
+      "outputs": [
+        "token",
+        "user"
+      ],
+      "logic_refs": [
+        "logic_signup_db",
+        "logic_password_hash",
+        "logic_jwt_auth"
+      ]
+    }
+  ]
+}

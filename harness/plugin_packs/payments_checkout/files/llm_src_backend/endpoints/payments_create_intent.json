@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_payments_create_intent",
+  "type": "endpoint",
+  "name": "payments_create_intent",
+  "description": "Creates provider payment intent for authenticated checkout.",
+  "route": "/api/payments/create-intent",
+  "method": "POST",
+  "inputs": ["amountMinor", "currency", "itemRef"],
+  "outputs": ["clientSecret", "intentId"],
+  "logic_refs": ["logic_payments_provider", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Recalculate amount server-side from authoritative itemRef pricing."
+}

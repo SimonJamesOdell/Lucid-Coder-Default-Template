@@ -1,0 +1,19 @@
+{
+  "id": "logic_fetchActivities",
+  "type": "logic",
+  "name": "fetchActivities",
+  "description": "Fetches leisure and group activities in JLT.",
+  "inputs": [],
+  "outputs": ["activities"],
+  "tests": [
+    {
+      "id": "test_fetchActivities_valid",
+      "type": "unit",
+      "description": "Fetches valid activities list.",
+      "input": {},
+      "expected_output": {"activities": [{"title": "Yoga Class", "date": "2026-03-01"}]},
+      "llm_notes": "Extend for filtering and sorting."
+    }
+  ],
+  "llm_notes": "Add filters and sorting as needed."
+}

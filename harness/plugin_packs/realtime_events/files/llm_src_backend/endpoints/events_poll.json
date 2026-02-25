@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_events_poll",
+  "type": "endpoint",
+  "name": "events_poll",
+  "description": "Polls events for an authenticated channel.",
+  "route": "/api/events/poll",
+  "method": "GET",
+  "inputs": ["channel", "cursor"],
+  "outputs": ["events", "cursor"],
+  "logic_refs": ["logic_events_bus", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Use short polling interval and bounded page sizes."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "component_App",
+  "type": "component",
+  "name": "App",
+  "description": "Root component of the web application.",
+  "props": [],
+  "children": ["component_LandingPage"],
+  "logic_refs": [],
+  "style_refs": [],
+  "tests": [
+    {
+      "id": "test_App_render",
+      "type": "unit",
+      "description": "Test that the App component renders without errors.",
+      "input": {},
+      "expected_output": { "renders": true },
+      "llm_notes": "Extend with more detailed render checks as needed."
+    }
+  ],
+  "llm_notes": "Add child components and logic as needed."
+}

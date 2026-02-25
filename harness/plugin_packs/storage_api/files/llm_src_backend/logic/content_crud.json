@@ -1,0 +1,9 @@
+{
+  "id": "logic_content_crud",
+  "type": "logic",
+  "description": "CRUD operations for Content model with ownership checks.",
+  "inputs": ["action", "payload", "user"],
+  "outputs": ["item", "items"],
+  "implementation": "Create/list/update/delete content records scoped to authenticated user.",
+  "llm_notes": "Enforce owner-based authorization and validate payload fields."
+}

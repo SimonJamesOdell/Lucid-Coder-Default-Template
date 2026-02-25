@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_payments_webhook",
+  "type": "endpoint",
+  "name": "payments_webhook",
+  "description": "Receives payment provider webhook notifications.",
+  "route": "/api/payments/webhook",
+  "method": "POST",
+  "inputs": ["providerPayload", "signature"],
+  "outputs": ["accepted"],
+  "logic_refs": ["logic_payments_webhook_verify", "logic_payments_provider"],
+  "public": true,
+  "llm_notes": "Webhook endpoint is public but must strictly verify signature before processing."
+}

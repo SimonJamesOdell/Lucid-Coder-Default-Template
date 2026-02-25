@@ -1,0 +1,22 @@
+{
+  "id": "backend_api",
+  "name": "Backend API Base",
+  "risk": "medium",
+  "description": "Adds backend manifest, security policy, and base backend model/logic scaffolding.",
+  "dependencies": ["core"],
+  "files": [
+    { "from": "llm_src_backend/manifest.json", "to": "llm_src_backend/manifest.json" },
+    { "from": "llm_src_backend/build_instructions.json", "to": "llm_src_backend/build_instructions.json" },
+    { "from": "llm_src_backend/security.json", "to": "llm_src_backend/security.json" },
+    { "from": "llm_src_backend/logic/db_init.json", "to": "llm_src_backend/logic/db_init.json" },
+    { "from": "llm_src_backend/logic/user_crud.json", "to": "llm_src_backend/logic/user_crud.json" },
+    { "from": "llm_src_backend/models/User.json", "to": "llm_src_backend/models/User.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src_backend/security.json",
+    "llm_src_backend/logic/db_init.json",
+    "llm_src_backend/logic/user_crud.json",
+    "llm_src_backend/models/User.json"
+  ],
+  "manifest_mutations": []
+}

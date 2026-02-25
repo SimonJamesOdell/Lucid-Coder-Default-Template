@@ -1,0 +1,50 @@
+{
+  "description": "Global manifest and dependency graph for LLM-driven web app.",
+  "components": [
+    "component_App",
+    "component_LandingPage",
+    "component_SocialLogins",
+    "component_LoginForm",
+    "component_SignupForm",
+    "component_UserProfile",
+    "component_ActivityFeed",
+    "component_NavBar"
+  ],
+  "logic": [
+    "logic_fetchUser",
+    "logic_fetchActivities"
+  ],
+  "routes": [
+    "route_Home",
+    "route_Profile"
+  ],
+  "styles": [
+    "style_LandingPage",
+    "style_LoginForm",
+    "style_SignupForm"
+  ],
+  "contracts": [
+    "contract_auth"
+  ],
+  "tests": [
+    "test_App_render",
+    "test_UserProfile_render",
+    "test_ActivityFeed_render",
+    "test_NavBar_render",
+    "test_Home_render",
+    "test_Profile_render",
+    "test_fetchUser_valid",
+    "test_fetchActivities_valid"
+  ],
+  "relationships": [],
+  "llm_notes": "All entities are referenced by unique IDs. This file is the single source of truth for project structure.",
+  "llm_guidelines": {
+    "rules": [
+      "All changes must be made through LLM-optimized data files (JSON schemas for components, logic, routes, endpoints, etc.).",
+      "Direct manipulation of runtime code is prohibited unless strictly necessary to expand system expressivity.",
+      "The LLM-optimized files are the canonical source for all features, logic, and tests.",
+      "Document and justify any deviation from these rules."
+    ],
+    "purpose": "Ensure all LLMs and agents working with this system understand and comply with the LLM-driven workflow and constraints."
+  }
+}

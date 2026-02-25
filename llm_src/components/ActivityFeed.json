@@ -1,0 +1,21 @@
+{
+  "id": "component_ActivityFeed",
+  "type": "component",
+  "name": "ActivityFeed",
+  "description": "Shows recent leisure and group activities in JLT.",
+  "props": ["activities"],
+  "children": [],
+  "logic_refs": ["logic_fetchActivities"],
+  "style_refs": [],
+  "tests": [
+    {
+      "id": "test_ActivityFeed_render",
+      "type": "unit",
+      "description": "Test that ActivityFeed displays activities.",
+      "input": {"activities": [{"title": "Yoga Class", "date": "2026-03-01"}]},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for more detailed checks."
+    }
+  ],
+  "llm_notes": "Add filters and sorting as needed."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "endpoint_login",
+  "type": "endpoint",
+  "name": "login",
+  "description": "POST endpoint for user login.",
+  "route": "/api/login",
+  "method": "POST",
+  "inputs": ["email", "password"],
+  "outputs": ["token", "user"],
+  "logic_refs": ["logic_login_db", "logic_password_hash", "logic_jwt_auth"],
+  "tests": [
+    {
+      "id": "test_login_success",
+      "type": "unit",
+      "description": "Login with valid credentials returns token and user.",
+      "input": {"email": "test@example.com", "password": "password123"},
+      "expected_output": {"token": "abc123", "user": {"email": "test@example.com"}},
+      "llm_notes": "Extend for error cases."
+    }
+  ],
+  "public": true,
+  "llm_notes": "Add error handling and validation."
+}

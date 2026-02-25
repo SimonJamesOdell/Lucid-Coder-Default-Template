@@ -1,0 +1,21 @@
+{
+  "id": "component_UserProfile",
+  "type": "component",
+  "name": "UserProfile",
+  "description": "Displays user information and leisure interests.",
+  "props": ["user"],
+  "children": [],
+  "logic_refs": ["logic_fetchUser"],
+  "style_refs": [],
+  "tests": [
+    {
+      "id": "test_UserProfile_render",
+      "type": "unit",
+      "description": "Test that UserProfile renders user info correctly.",
+      "input": {"user": {"name": "Ali", "interests": ["Tennis", "Dining"]}},
+      "expected_output": {"renders": true},
+      "llm_notes": "Extend for more detailed checks."
+    }
+  ],
+  "llm_notes": "Add more fields and children as needed."
+}

@@ -1,0 +1,41 @@
+{
+  "id": "payments_checkout",
+  "name": "Payments Checkout",
+  "risk": "high",
+  "description": "Adds payment intent and webhook capabilities with strong server-side verification requirements.",
+  "dependencies": ["core", "backend_api", "auth_api"],
+  "files": [
+    { "from": "llm_src/contracts/payments.json", "to": "llm_src/contracts/payments.json" },
+    { "from": "llm_src_backend/endpoints/payments_create_intent.json", "to": "llm_src_backend/endpoints/payments_create_intent.json" },
+    { "from": "llm_src_backend/endpoints/payments_webhook.json", "to": "llm_src_backend/endpoints/payments_webhook.json" },
+    { "from": "llm_src_backend/logic/payments_provider.json", "to": "llm_src_backend/logic/payments_provider.json" },
+    { "from": "llm_src_backend/logic/payments_webhook_verify.json", "to": "llm_src_backend/logic/payments_webhook_verify.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/payments.json",
+    "llm_src_backend/endpoints/payments_create_intent.json",
+    "llm_src_backend/endpoints/payments_webhook.json",
+    "llm_src_backend/logic/payments_provider.json",
+    "llm_src_backend/logic/payments_webhook_verify.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_payments"],
+      "remove": ["contract_payments"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_payments_create_intent", "endpoint_payments_webhook"],
+      "remove": ["endpoint_payments_create_intent", "endpoint_payments_webhook"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_payments_provider", "logic_payments_webhook_verify"],
+      "remove": ["logic_payments_provider", "logic_payments_webhook_verify"]
+    }
+  ]
+}

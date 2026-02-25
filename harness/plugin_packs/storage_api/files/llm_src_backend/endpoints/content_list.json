@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_content_list",
+  "type": "endpoint",
+  "name": "content_list",
+  "description": "GET endpoint for listing content records.",
+  "route": "/api/content",
+  "method": "GET",
+  "inputs": [],
+  "outputs": ["items"],
+  "logic_refs": ["logic_content_crud", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Apply filtering/pagination as needed."
+}

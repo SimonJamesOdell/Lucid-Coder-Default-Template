@@ -1,0 +1,19 @@
+{
+  "id": "logic_fetchUser",
+  "type": "logic",
+  "name": "fetchUser",
+  "description": "Fetches user data for profile display.",
+  "inputs": ["userId"],
+  "outputs": ["user"],
+  "tests": [
+    {
+      "id": "test_fetchUser_valid",
+      "type": "unit",
+      "description": "Fetches valid user data.",
+      "input": {"userId": "123"},
+      "expected_output": {"user": {"name": "Ali", "interests": ["Tennis", "Dining"]}},
+      "llm_notes": "Extend for error cases."
+    }
+  ],
+  "llm_notes": "Add error handling and caching as needed."
+}

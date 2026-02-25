@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_events_publish",
+  "type": "endpoint",
+  "name": "events_publish",
+  "description": "Publishes an event to an authenticated channel.",
+  "route": "/api/events/publish",
+  "method": "POST",
+  "inputs": ["channel", "eventType", "payload"],
+  "outputs": ["accepted"],
+  "logic_refs": ["logic_events_bus", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Apply per-channel authorization checks before publish."
+}

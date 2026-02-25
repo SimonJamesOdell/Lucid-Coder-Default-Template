@@ -1,0 +1,15 @@
+{
+  "id": "model_MediaAsset",
+  "type": "model",
+  "description": "Stored media metadata record.",
+  "fields": [
+    {"name": "id", "type": "string", "primary": true},
+    {"name": "ownerId", "type": "string", "index": true},
+    {"name": "filename", "type": "string"},
+    {"name": "mimeType", "type": "string"},
+    {"name": "byteLength", "type": "number"},
+    {"name": "storageKey", "type": "string"},
+    {"name": "createdAt", "type": "string"}
+  ],
+  "llm_notes": "Never expose raw storage keys directly to unauthorized clients."
+}

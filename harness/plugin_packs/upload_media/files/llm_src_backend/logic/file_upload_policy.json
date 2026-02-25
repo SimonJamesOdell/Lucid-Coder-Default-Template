@@ -1,0 +1,9 @@
+{
+  "id": "logic_file_upload_policy",
+  "type": "logic",
+  "description": "Validation policy for uploaded media.",
+  "inputs": ["filename", "mimeType", "bytesBase64", "user"],
+  "outputs": ["valid", "error"],
+  "implementation": "Reject unsupported mime types, oversized payloads, and malformed inputs.",
+  "llm_notes": "Define strict allowlist and maximum size thresholds."
+}

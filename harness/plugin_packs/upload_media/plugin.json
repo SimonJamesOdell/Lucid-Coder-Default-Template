@@ -1,0 +1,47 @@
+{
+  "id": "upload_media",
+  "name": "Upload Media",
+  "risk": "high",
+  "description": "Adds authenticated media upload endpoint, metadata model, and upload policy logic.",
+  "dependencies": ["core", "backend_api", "auth_api", "storage_api"],
+  "files": [
+    { "from": "llm_src/contracts/upload.json", "to": "llm_src/contracts/upload.json" },
+    { "from": "llm_src_backend/endpoints/upload_media.json", "to": "llm_src_backend/endpoints/upload_media.json" },
+    { "from": "llm_src_backend/logic/file_upload_policy.json", "to": "llm_src_backend/logic/file_upload_policy.json" },
+    { "from": "llm_src_backend/logic/file_store.json", "to": "llm_src_backend/logic/file_store.json" },
+    { "from": "llm_src_backend/models/MediaAsset.json", "to": "llm_src_backend/models/MediaAsset.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/upload.json",
+    "llm_src_backend/endpoints/upload_media.json",
+    "llm_src_backend/logic/file_upload_policy.json",
+    "llm_src_backend/logic/file_store.json",
+    "llm_src_backend/models/MediaAsset.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_upload"],
+      "remove": ["contract_upload"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_upload_media"],
+      "remove": ["endpoint_upload_media"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_file_upload_policy", "logic_file_store"],
+      "remove": ["logic_file_upload_policy", "logic_file_store"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "models",
+      "add": ["model_MediaAsset"],
+      "remove": ["model_MediaAsset"]
+    }
+  ]
+}

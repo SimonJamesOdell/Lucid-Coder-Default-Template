@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_content_create",
+  "type": "endpoint",
+  "name": "content_create",
+  "description": "POST endpoint for creating content records.",
+  "route": "/api/content",
+  "method": "POST",
+  "inputs": ["title", "body"],
+  "outputs": ["item"],
+  "logic_refs": ["logic_content_crud", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Apply validation/sanitization in logic_content_crud."
+}

@@ -1,0 +1,47 @@
+{
+  "id": "storage_api",
+  "name": "Storage API",
+  "risk": "medium",
+  "description": "Adds generic content persistence endpoints, model, and CRUD logic.",
+  "dependencies": ["core", "backend_api"],
+  "files": [
+    { "from": "llm_src/contracts/storage.json", "to": "llm_src/contracts/storage.json" },
+    { "from": "llm_src_backend/endpoints/content_list.json", "to": "llm_src_backend/endpoints/content_list.json" },
+    { "from": "llm_src_backend/endpoints/content_create.json", "to": "llm_src_backend/endpoints/content_create.json" },
+    { "from": "llm_src_backend/logic/content_crud.json", "to": "llm_src_backend/logic/content_crud.json" },
+    { "from": "llm_src_backend/models/Content.json", "to": "llm_src_backend/models/Content.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/storage.json",
+    "llm_src_backend/endpoints/content_list.json",
+    "llm_src_backend/endpoints/content_create.json",
+    "llm_src_backend/logic/content_crud.json",
+    "llm_src_backend/models/Content.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_storage"],
+      "remove": ["contract_storage"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_content_list", "endpoint_content_create"],
+      "remove": ["endpoint_content_list", "endpoint_content_create"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_content_crud"],
+      "remove": ["logic_content_crud"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "models",
+      "add": ["model_Content"],
+      "remove": ["model_Content"]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "command": "disable",
+  "plugin": "auth_api",
+  "remove_files": [
+    "llm_src/contracts/auth.json",
+    "llm_src_backend/endpoints/login.json",
+    "llm_src_backend/endpoints/signup.json",
+    "llm_src_backend/logic/login_db.json",
+    "llm_src_backend/logic/signup_db.json",
+    "llm_src_backend/logic/password_hash.json",
+    "llm_src_backend/logic/jwt_auth.json",
+    "llm_src_backend/logic/jwt_protect.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "action": "disable",
+      "before": [
+        "contract_auth"
+      ],
+      "after": []
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "action": "disable",
+      "before": [
+        "endpoint_login",
+        "endpoint_signup"
+      ],
+      "after": []
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "action": "disable",
+      "before": [
+        "logic_db_init",
+        "logic_user_crud",
+        "logic_login_db",
+        "logic_signup_db",
+        "logic_password_hash",
+        "logic_jwt_auth",
+        "logic_jwt_protect"
+      ],
+      "after": [
+        "logic_db_init",
+        "logic_user_crud"
+      ]
+    }
+  ]
+}

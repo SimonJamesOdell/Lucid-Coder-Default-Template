@@ -1,0 +1,19 @@
+{
+  "description": "Backend manifest and dependency graph for LLM-driven web app.",
+  "endpoints": [],
+  "logic": ["logic_db_init", "logic_user_crud"],
+  "models": ["model_User"],
+  "security": ["security_policy"],
+  "tests": [],
+  "relationships": [],
+  "llm_notes": "All backend entities are referenced by unique IDs. This file is the single source of truth for backend structure.",
+  "llm_guidelines": {
+    "rules": [
+      "All changes must be made through LLM-optimized data files (JSON schemas for endpoints, logic, models, etc.).",
+      "Direct manipulation of runtime code is prohibited unless strictly necessary to expand system expressivity.",
+      "The LLM-optimized files are the canonical source for all features, logic, and tests.",
+      "Document and justify any deviation from these rules."
+    ],
+    "purpose": "Ensure all LLMs and agents working with this system understand and comply with the LLM-driven workflow and constraints."
+  }
+}

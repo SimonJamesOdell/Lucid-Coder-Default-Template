@@ -1,0 +1,9 @@
+{
+  "id": "logic_user_crud",
+  "type": "logic",
+  "description": "CRUD operations for User model in database.",
+  "inputs": ["action", "data"],
+  "outputs": ["result"],
+  "implementation": "Perform create, read, update, delete for User table in SQLite DB.",
+  "llm_notes": "Action can be 'create', 'read', 'update', 'delete'. Data is user object or query params."
+}

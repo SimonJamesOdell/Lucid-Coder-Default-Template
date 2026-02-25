@@ -1,0 +1,47 @@
+{
+  "id": "auth_api",
+  "name": "Auth API",
+  "risk": "high",
+  "description": "Adds login/signup auth contracts, endpoints, and JWT/password logic.",
+  "dependencies": ["core", "backend_api"],
+  "files": [
+    { "from": "llm_src/contracts/auth.json", "to": "llm_src/contracts/auth.json" },
+    { "from": "llm_src_backend/endpoints/login.json", "to": "llm_src_backend/endpoints/login.json" },
+    { "from": "llm_src_backend/endpoints/signup.json", "to": "llm_src_backend/endpoints/signup.json" },
+    { "from": "llm_src_backend/logic/login_db.json", "to": "llm_src_backend/logic/login_db.json" },
+    { "from": "llm_src_backend/logic/signup_db.json", "to": "llm_src_backend/logic/signup_db.json" },
+    { "from": "llm_src_backend/logic/password_hash.json", "to": "llm_src_backend/logic/password_hash.json" },
+    { "from": "llm_src_backend/logic/jwt_auth.json", "to": "llm_src_backend/logic/jwt_auth.json" },
+    { "from": "llm_src_backend/logic/jwt_protect.json", "to": "llm_src_backend/logic/jwt_protect.json" }
+  ],
+  "remove_on_disable": [
+    "llm_src/contracts/auth.json",
+    "llm_src_backend/endpoints/login.json",
+    "llm_src_backend/endpoints/signup.json",
+    "llm_src_backend/logic/login_db.json",
+    "llm_src_backend/logic/signup_db.json",
+    "llm_src_backend/logic/password_hash.json",
+    "llm_src_backend/logic/jwt_auth.json",
+    "llm_src_backend/logic/jwt_protect.json"
+  ],
+  "manifest_mutations": [
+    {
+      "file": "llm_src/manifest.json",
+      "field": "contracts",
+      "add": ["contract_auth"],
+      "remove": ["contract_auth"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "endpoints",
+      "add": ["endpoint_login", "endpoint_signup"],
+      "remove": ["endpoint_login", "endpoint_signup"]
+    },
+    {
+      "file": "llm_src_backend/manifest.json",
+      "field": "logic",
+      "add": ["logic_login_db", "logic_signup_db", "logic_password_hash", "logic_jwt_auth", "logic_jwt_protect"],
+      "remove": ["logic_login_db", "logic_signup_db", "logic_password_hash", "logic_jwt_auth", "logic_jwt_protect"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "logic_login",
+  "type": "logic",
+  "description": "Authenticate user and return token/user object.",
+  "inputs": ["email", "password"],
+  "outputs": ["token", "user"],
+  "implementation": "If email and password match a user, return a token and user object. Else, return error.",
+  "tests": [
+    {
+      "id": "test_login_valid",
+      "type": "unit",
+      "input": {"email": "test@example.com", "password": "password123"},
+      "expected_output": {"token": "abc123", "user": {"email": "test@example.com"}}
+    },
+    {
+      "id": "test_login_invalid",
+      "type": "unit",
+      "input": {"email": "wrong@example.com", "password": "badpass"},
+      "expected_output": {"error": "Invalid credentials"}
+    }
+  ]
+}

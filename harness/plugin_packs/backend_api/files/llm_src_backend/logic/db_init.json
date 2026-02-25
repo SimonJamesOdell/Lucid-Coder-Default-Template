@@ -1,0 +1,9 @@
+{
+  "id": "logic_db_init",
+  "type": "logic",
+  "description": "Initialize database connection for backend.",
+  "inputs": [],
+  "outputs": ["db"],
+  "implementation": "Connect to SQLite database file 'users.db'. Create User table if not exists.",
+  "llm_notes": "Use sqlite3 for demo. Expand to other DBs as needed."
+}

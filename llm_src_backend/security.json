@@ -1,0 +1,26 @@
+{
+  "id": "security_policy",
+  "type": "security",
+  "description": "Canonical backend security policy for generated runtime.",
+  "jwt": {
+    "secret_env": "JWT_SECRET",
+    "expires_in": "1h",
+    "issuer": "smallGPT-api"
+  },
+  "cors": {
+    "allowlist_env": "CORS_ORIGINS",
+    "allow_credentials": false
+  },
+  "rate_limit": {
+    "window_ms": 60000,
+    "max_requests": 20,
+    "auth_max_requests": 10
+  },
+  "body": {
+    "json_limit": "16kb"
+  },
+  "headers": {
+    "helmet": true
+  },
+  "llm_notes": "Use env-driven secrets and CORS allowlists; never hardcode secrets in runtime output."
+}

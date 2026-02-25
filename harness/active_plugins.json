@@ -1,0 +1,20 @@
+{
+  "active": [
+    "core",
+    "backend_api",
+    "auth_api"
+  ],
+  "managed_files": {
+    "auth_api": [
+      "llm_src/contracts/auth.json",
+      "llm_src_backend/endpoints/login.json",
+      "llm_src_backend/endpoints/signup.json",
+      "llm_src_backend/logic/login_db.json",
+      "llm_src_backend/logic/signup_db.json",
+      "llm_src_backend/logic/password_hash.json",
+      "llm_src_backend/logic/jwt_auth.json",
+      "llm_src_backend/logic/jwt_protect.json"
+    ]
+  },
+  "updated_at": "2026-02-25T00:27:15.792Z"
+}

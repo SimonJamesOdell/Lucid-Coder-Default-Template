@@ -1,0 +1,9 @@
+{
+  "id": "logic_rbac_policy",
+  "type": "logic",
+  "description": "Role-based access control policy checks.",
+  "inputs": ["user", "action", "resource"],
+  "outputs": ["allowed", "reason"],
+  "implementation": "Evaluate user roles against action/resource policy map.",
+  "llm_notes": "Default deny if no explicit allow rule exists."
+}

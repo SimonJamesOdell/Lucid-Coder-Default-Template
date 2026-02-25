@@ -1,0 +1,19 @@
+{
+  "steps": {
+    "dev:node validate_llm_invariants.cjs": {
+      "scope": "global",
+      "fingerprint": "ad369f35f9cc391dd286880778fe022428a63b39",
+      "updated_at": "2026-02-25T00:27:16.765Z"
+    },
+    "dev:node build_llm_backend.cjs": {
+      "scope": "backend",
+      "fingerprint": "0db7842f7d22f00607f44fa46896aa6d1654cddf",
+      "updated_at": "2026-02-25T00:27:17.073Z"
+    },
+    "dev:node build_llm_bundle.cjs": {
+      "scope": "global",
+      "fingerprint": "ad369f35f9cc391dd286880778fe022428a63b39",
+      "updated_at": "2026-02-25T00:27:17.220Z"
+    }
+  }
+}

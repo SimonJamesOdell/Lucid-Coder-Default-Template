@@ -1,0 +1,9 @@
+{
+  "id": "core",
+  "name": "Core Harness",
+  "risk": "low",
+  "description": "Always-on core plugin for invariant validation and base build/test gates.",
+  "dependencies": [],
+  "files": [],
+  "manifest_mutations": []
+}

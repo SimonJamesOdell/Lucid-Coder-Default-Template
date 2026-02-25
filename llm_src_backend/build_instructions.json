@@ -1,0 +1,22 @@
+{
+  "description": "LLM-readable backend build process for assembling and validating the backend from data files.",
+  "steps": [
+    "Harness detects backend capability from LLM backend manifest before invoking backend-specific gates.",
+    "During development, backend checks are invoked only for backend changes in fast mode; strict mode adds runtime/security tests.",
+    "Parse manifest.json to discover all backend entities.",
+    "Load llm_src/invariants.json as the canonical contract/invariant policy input.",
+    "Load llm_src_backend/security.json as the canonical backend security policy.",
+    "Validate endpoint schemas against shared frontend/backend contracts before backend output generation.",
+    "Enforce explicit endpoint visibility flags (public:true/false) and secure-by-default JWT policy.",
+    "Assemble endpoints, logic, models, and tests according to relationships.",
+    "Generate backend runtime only in /backend_dist/server.cjs with policy-driven middleware.",
+    "Generate backend_dist/manifest.generated.json with endpoint security metadata for drift checks.",
+    "Run all embedded and global tests, validate outputs automatically.",
+    "Run backend runtime smoke tests against generated server (health, signup, login, failure paths).",
+    "If auth capability exists, run backend security tests (production guard + rate limiting).",
+    "Output test results (pass/fail, details) in terminal after each build.",
+    "Run release assurance gate (`npm run release:assure`) before deployment.",
+    "Report test results and halt build if any test fails."
+  ],
+  "llm_notes": "This file describes the canonical backend build process. Update as needed for new build steps."
+}

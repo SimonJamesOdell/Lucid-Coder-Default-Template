@@ -1,0 +1,12 @@
+{
+  "id": "contract_admin",
+  "type": "contract",
+  "description": "Canonical admin contract with role-gated operations.",
+  "list_users": {
+    "method": "GET",
+    "route": "/api/admin/users",
+    "inputs": [],
+    "outputs": ["users"]
+  },
+  "llm_notes": "All admin operations must pass role checks and generate audit logs."
+}

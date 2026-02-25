@@ -1,0 +1,13 @@
+{
+  "id": "endpoint_admin_list_users",
+  "type": "endpoint",
+  "name": "admin_list_users",
+  "description": "Admin endpoint for listing user accounts.",
+  "route": "/api/admin/users",
+  "method": "GET",
+  "inputs": [],
+  "outputs": ["users"],
+  "logic_refs": ["logic_rbac_policy", "logic_admin_audit_log", "logic_jwt_protect"],
+  "public": false,
+  "llm_notes": "Require admin role and redact sensitive fields from output."
+}

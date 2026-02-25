@@ -1,0 +1,18 @@
+{
+  "id": "contract_payments",
+  "type": "contract",
+  "description": "Canonical payments contract for checkout intent and webhook confirmation.",
+  "create_intent": {
+    "method": "POST",
+    "route": "/api/payments/create-intent",
+    "inputs": ["amountMinor", "currency", "itemRef"],
+    "outputs": ["clientSecret", "intentId"]
+  },
+  "webhook": {
+    "method": "POST",
+    "route": "/api/payments/webhook",
+    "inputs": ["providerPayload", "signature"],
+    "outputs": ["accepted"]
+  },
+  "llm_notes": "Never trust client totals; compute amount server-side and verify webhook signatures."
+}

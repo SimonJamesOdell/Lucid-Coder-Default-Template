@@ -1,0 +1,9 @@
+{
+  "id": "logic_admin_audit_log",
+  "type": "logic",
+  "description": "Writes immutable audit records for admin actions.",
+  "inputs": ["actor", "action", "target", "metadata"],
+  "outputs": ["logged"],
+  "implementation": "Persist audit event with timestamp and correlation id.",
+  "llm_notes": "Never skip audit logging for privileged operations."
+}
