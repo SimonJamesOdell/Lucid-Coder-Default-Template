@@ -3,9 +3,6 @@
   "components": [
     "component_App",
     "component_LandingPage",
-    "component_SocialLogins",
-    "component_LoginForm",
-    "component_SignupForm",
     "component_UserProfile",
     "component_ActivityFeed",
     "component_NavBar"
@@ -19,13 +16,9 @@
     "route_Profile"
   ],
   "styles": [
-    "style_LandingPage",
-    "style_LoginForm",
-    "style_SignupForm"
+    "style_LandingPage"
   ],
-  "contracts": [
-    "contract_auth"
-  ],
+  "contracts": [],
   "tests": [
     "test_App_render",
     "test_UserProfile_render",

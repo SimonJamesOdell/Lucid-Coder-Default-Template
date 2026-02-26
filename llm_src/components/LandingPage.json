@@ -2,20 +2,20 @@
   "id": "component_LandingPage",
   "type": "component",
   "name": "LandingPage",
-  "description": "Landing page with centered auth modal and three columns.",
+  "description": "Starter landing page with neutral onboarding copy.",
   "props": [],
-  "children": ["component_SocialLogins", "component_LoginForm", "component_SignupForm"],
+  "children": [],
   "logic_refs": [],
   "style_refs": ["style_LandingPage"],
   "tests": [
     {
       "id": "test_LandingPage_render",
       "type": "unit",
-      "description": "LandingPage renders login and signup forms.",
+      "description": "LandingPage renders starter onboarding content.",
       "input": {},
       "expected_output": {"renders": true},
-      "llm_notes": "Extend for form validation and routing checks."
+      "llm_notes": "Extend for onboarding actions and routing checks."
     }
   ],
-  "llm_notes": "Layout: 3 columns in modal (image, social logins, tabbed login/sign-up)."
+  "llm_notes": "Use this as a neutral, domain-agnostic starting surface."
 }

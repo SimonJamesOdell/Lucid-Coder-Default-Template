@@ -1,9 +1,0 @@
-{
-  "id": "logic_jwt_auth",
-  "type": "logic",
-  "description": "Generate and verify JWT tokens for user authentication.",
-  "inputs": ["user", "token"],
-  "outputs": ["token", "user"],
-  "implementation": "Use jsonwebtoken to sign user info on login/signup and verify on protected endpoints.",
-  "llm_notes": "Install jsonwebtoken. Use a secret key from env."
-}

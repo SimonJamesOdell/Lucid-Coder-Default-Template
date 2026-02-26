@@ -1,9 +1,0 @@
-{
-  "id": "logic_login_db",
-  "type": "logic",
-  "description": "Authenticate user using database and return token/user object.",
-  "inputs": ["email", "password"],
-  "outputs": ["token", "user"],
-  "implementation": "Query User table in SQLite DB for matching email and password. Return token and user object if found, else error.",
-  "llm_notes": "Replace in-memory check with DB query."
-}

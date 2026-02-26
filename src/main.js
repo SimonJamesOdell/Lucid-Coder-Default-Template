@@ -1,19 +1,17 @@
 import './style.css';
 
-const APP_HTML = "<div class='app-container'><div class='landing-container'><h1>Welcome to JLT Leisure Social Network</h1><div class='landing-image-col' aria-hidden='true'></div><div class='social-col'><h2>Continue with Social</h2><button class='social-btn' type='button'>Continue with Google</button><button class='social-btn' type='button'>Continue with Apple</button><button class='social-btn' type='button'>Continue with Facebook</button><button class='social-btn' type='button'>Continue with X</button></div><div class='auth-col'><h2 class='auth-title'>Account Access</h2><div class='auth-tabs'><button class='auth-tab active' type='button' data-tab='login'>Login</button><button class='auth-tab' type='button' data-tab='signup'>Sign up</button></div><div class='auth-panel active' data-panel='login'><div class='loginform-container'><form id='login-form' class='login-form'><h2>Login</h2><input type='email' name='email' placeholder='Email' required><input type='password' name='password' placeholder='Password' required><button type='submit'>Login</button><p class='form-error' data-error='login'></p></form></div></div><div class='auth-panel' data-panel='signup'><div class='signupform-container'><form id='signup-form' class='signup-form'><h2>Sign Up</h2><input type='text' name='name' placeholder='Name' required><input type='email' name='email' placeholder='Email' required><input type='password' name='password' placeholder='Password' required><button type='submit'>Sign Up</button><p class='form-error' data-error='signup'></p></form></div></div></div></div></div>";
-const HOME_HTML = "<div class='route-home'><div class='navbar-container'><nav class='navbar'><strong>JLT Life</strong><button id='logout-btn' type='button'>Log out</button></nav></div><div class='activityfeed-container'><section class='activity-feed'><h2>Recent Activities</h2><ul><li>Yoga Class — 2026-03-01</li><li>Padel Meetup — 2026-03-04</li><li>Board Games Night — 2026-03-07</li></ul></section></div></div>";
-const AUTH_CONTRACT = {"id":"contract_auth","type":"contract","description":"Canonical auth contract shared by frontend and backend LLM layers.","baseUrl":"__DYNAMIC__","login":{"method":"POST","route":"/api/login","inputs":["email","password"],"outputs":["token","user"]},"signup":{"method":"POST","route":"/api/signup","inputs":["name","email","password"],"outputs":["token","user"]},"llm_notes":"Compiler validates this contract against llm_src_backend/endpoints/*.json and fails build on mismatch. baseUrl is resolved at runtime: if window.API_BASE_URL is set, use it; else use window.location.origin with port 3001; else fallback to http://localhost:3001."};
+const APP_HTML = "<div class='app-container'><div class='landing-container'><h1>Welcome to Your App</h1><p class='starter-copy'>Start by editing llm_src and llm_src_backend to define your product features.</p></div><div class='navbar-container'><nav class='navbar'><strong>Starter App</strong></nav></div><div class='activityfeed-container'><section class='activity-feed'><h2>Recent Activities</h2><ul><li>Kickoff planning</li><li>First feature draft</li><li>Initial validation run</li></ul></section></div></div>";
+const HOME_HTML = "<div class='route-home'><div class='navbar-container'><nav class='navbar'><strong>Starter App</strong></nav></div><div class='activityfeed-container'><section class='activity-feed'><h2>Recent Activities</h2><ul><li>Kickoff planning</li><li>First feature draft</li><li>Initial validation run</li></ul></section></div></div>";
+const AUTH_ENABLED = false;
+const AUTH_CONTRACT = null;
 
 function resolveApiBaseUrl() {
   if (typeof window !== 'undefined') {
     if (window.API_BASE_URL) return window.API_BASE_URL;
-    // If running on a non-localhost host, use that host with backend port
     const { protocol, hostname } = window.location;
     if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
       return protocol + '//' + hostname + ':3001';
     }
-    // Fallback to localhost
-    return 'http://localhost:3001';
   }
   return 'http://localhost:3001';
 }
@@ -33,17 +31,19 @@ function activateTabs() {
   });
 }
 
-function getEndpoint(kind) {
-  const spec = AUTH_CONTRACT[kind];
-  return {
-    method: spec.method,
-    url: (AUTH_CONTRACT.baseUrl === '__DYNAMIC__' ? resolveApiBaseUrl() : AUTH_CONTRACT.baseUrl) + spec.route,
-  };
-}
-
 function setFormError(kind, message) {
   const target = document.querySelector(`.form-error[data-error="${kind}"]`);
   if (target) target.textContent = message || '';
+}
+
+function getEndpoint(kind) {
+  if (!AUTH_ENABLED || !AUTH_CONTRACT || !AUTH_CONTRACT[kind]) {
+    throw new Error('Authentication capability is not enabled');
+  }
+
+  const spec = AUTH_CONTRACT[kind];
+  const baseUrl = AUTH_CONTRACT.baseUrl === '__DYNAMIC__' ? resolveApiBaseUrl() : AUTH_CONTRACT.baseUrl;
+  return { method: spec.method, url: baseUrl + spec.route };
 }
 
 async function callAuth(kind, payload) {
@@ -64,6 +64,7 @@ async function callAuth(kind, payload) {
 function renderHome() {
   const root = document.getElementById('root');
   root.innerHTML = HOME_HTML;
+
   const logoutButton = document.getElementById('logout-btn');
   if (logoutButton) {
     logoutButton.addEventListener('click', () => {
@@ -75,6 +76,8 @@ function renderHome() {
 }
 
 function attachAuthHandlers() {
+  if (!AUTH_ENABLED) return;
+
   const loginForm = document.getElementById('login-form');
   const signupForm = document.getElementById('signup-form');
 
@@ -126,7 +129,7 @@ function renderLanding() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('authToken')) {
+  if (AUTH_ENABLED && localStorage.getItem('authToken')) {
     renderHome();
     return;
   }

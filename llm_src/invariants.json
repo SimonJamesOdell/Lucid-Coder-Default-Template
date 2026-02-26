@@ -5,8 +5,7 @@
   "frontend": {
     "manifest_path": "llm_src/manifest.json",
     "required_manifest_ids": {
-      "contracts": ["contract_auth"],
-      "components": ["component_App", "component_LoginForm", "component_SignupForm"],
+      "components": ["component_App", "component_LandingPage"],
       "routes": ["route_Home"]
     }
   },

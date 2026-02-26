@@ -1,17 +1,9 @@
 {
   "description": "Backend manifest and dependency graph for LLM-driven web app.",
-  "endpoints": [
-    "endpoint_login",
-    "endpoint_signup"
-  ],
+  "endpoints": [],
   "logic": [
     "logic_db_init",
-    "logic_user_crud",
-    "logic_login_db",
-    "logic_signup_db",
-    "logic_password_hash",
-    "logic_jwt_auth",
-    "logic_jwt_protect"
+    "logic_user_crud"
   ],
   "models": [
     "model_User"

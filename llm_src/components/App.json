@@ -2,9 +2,9 @@
   "id": "component_App",
   "type": "component",
   "name": "App",
-  "description": "Root component of the web application.",
+  "description": "Root component of the starter web application.",
   "props": [],
-  "children": ["component_LandingPage"],
+  "children": ["component_LandingPage", "component_NavBar", "component_ActivityFeed"],
   "logic_refs": [],
   "style_refs": [],
   "tests": [
