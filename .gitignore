@@ -27,3 +27,18 @@ coverage/
 
 # Harness runtime artifacts
 harness/.dev_cache.json
+
+# Dependency lockfiles (template should start clean)
+package-lock.json
+frontend/package-lock.json
+backend/package-lock.json
+npm-shrinkwrap.json
+yarn.lock
+pnpm-lock.yaml
+frontend/yarn.lock
+backend/yarn.lock
+frontend/pnpm-lock.yaml
+backend/pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+uv.lock
