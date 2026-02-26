@@ -173,5 +173,8 @@ function llmHotReloadPlugin() {
 
 export default defineConfig({
   plugins: [llmHotReloadPlugin()],
+  server: {
+    host: '0.0.0.0',
+  },
   publicDir: 'public', // Serve static files from public
 });
