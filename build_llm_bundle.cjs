@@ -54,8 +54,12 @@ function buildCssFromStructuredStyle(styleJson) {
     return '';
   }
 
+  if (typeof styleJson.selector === 'string' && styleJson.selector.trim() && styleJson.rules && typeof styleJson.rules === 'object') {
+    return buildCssRuleFromObject(styleJson.selector.trim(), styleJson.rules);
+  }
+
   const selectorEntries = Object.entries(styleJson)
-    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && value && typeof value === 'object');
+    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && key !== 'selector' && key !== 'rules' && value && typeof value === 'object');
 
   const blocks = selectorEntries
     .map(([selectorKey, declarations]) => {
