@@ -111,12 +111,14 @@ function buildCssFromStructuredStyle(styleJson) {
     return '';
   }
 
+  const blocks = [];
+
   if (Array.isArray(styleJson.styles)) {
     const entryBlocks = styleJson.styles
       .map((entry) => buildCssFromStyleEntry(entry))
       .filter(Boolean);
     if (entryBlocks.length > 0) {
-      return entryBlocks.join('\n\n');
+      blocks.push(...entryBlocks);
     }
   }
 
@@ -127,14 +129,29 @@ function buildCssFromStructuredStyle(styleJson) {
       || (styleJson.properties && typeof styleJson.properties === 'object' && styleJson.properties)
       || null;
     if (selectorRuleObject) {
-      return buildCssRuleFromObject(styleJson.selector.trim(), selectorRuleObject);
+      const selectorBlock = buildCssRuleFromObject(styleJson.selector.trim(), selectorRuleObject);
+      if (selectorBlock) {
+        blocks.push(selectorBlock);
+      }
     }
   }
 
-  const selectorEntries = Object.entries(styleJson)
-    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && key !== 'selector' && key !== 'rules' && key !== 'styles' && key !== 'properties' && value && typeof value === 'object');
+  if (styleJson.keyframes && typeof styleJson.keyframes === 'object' && !Array.isArray(styleJson.keyframes)) {
+    Object.entries(styleJson.keyframes).forEach(([name, frames]) => {
+      if (typeof name !== 'string' || !name.trim()) {
+        return;
+      }
+      const atRuleBlock = buildCssAtRuleBlock(`@keyframes ${name.trim()}`, frames);
+      if (atRuleBlock) {
+        blocks.push(atRuleBlock);
+      }
+    });
+  }
 
-  const blocks = selectorEntries
+  const selectorEntries = Object.entries(styleJson)
+    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && key !== 'selector' && key !== 'rules' && key !== 'styles' && key !== 'properties' && key !== 'keyframes' && value && typeof value === 'object');
+
+  const objectBlocks = selectorEntries
     .map(([selectorKey, declarations]) => {
       if (selectorKey.startsWith('@')) {
         return buildCssAtRuleBlock(selectorKey, declarations);
@@ -143,6 +160,14 @@ function buildCssFromStructuredStyle(styleJson) {
       return buildCssRuleFromObject(selector, declarations);
     })
     .filter(Boolean);
+
+  if (objectBlocks.length > 0) {
+    blocks.push(...objectBlocks);
+  }
+
+  if (blocks.length === 0) {
+    return '';
+  }
 
   return blocks.join('\n\n');
 }

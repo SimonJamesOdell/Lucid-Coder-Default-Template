@@ -121,3 +121,47 @@ test('build_llm_bundle compiles styles array entries including at-rules', () => 
     assert.doesNotMatch(compiledCss, /\bstyles\s*\{/i);
   });
 });
+
+test('build_llm_bundle compiles selector schema plus keyframes alias in same object', () => {
+  withTempStyleJson('selector_plus_keyframes_alias', {
+    selector: 'body',
+    rules: {
+      animation: 'waveAlias 7s ease infinite',
+      backgroundSize: '200% 200%'
+    },
+    keyframes: {
+      waveAlias: {
+        '0%': { backgroundPosition: '0% 50%' },
+        '100%': { backgroundPosition: '100% 50%' }
+      }
+    }
+  }, (compiledCss) => {
+    assert.match(compiledCss, /animation:\s*waveAlias 7s ease infinite;/i);
+    assert.match(compiledCss, /@keyframes\s+waveAlias\s*\{/i);
+  });
+});
+
+test('build_llm_bundle compiles styles array and top-level keyframes alias together', () => {
+  withTempStyleJson('styles_array_plus_keyframes_alias', {
+    styles: [
+      {
+        selector: 'body',
+        rules: {
+          animation: 'arrayWave 5s linear infinite',
+          background: 'linear-gradient(to right, #0ea5e9, #7c3aed)'
+        }
+      }
+    ],
+    keyframes: {
+      arrayWave: {
+        '0%': { backgroundPosition: '0% 50%' },
+        '50%': { backgroundPosition: '100% 50%' },
+        '100%': { backgroundPosition: '0% 50%' }
+      }
+    }
+  }, (compiledCss) => {
+    assert.match(compiledCss, /animation:\s*arrayWave 5s linear infinite;/i);
+    assert.match(compiledCss, /@keyframes\s+arrayWave\s*\{/i);
+    assert.match(compiledCss, /50%\s*\{[\s\S]*background-position:\s*100% 50%;/i);
+  });
+});
