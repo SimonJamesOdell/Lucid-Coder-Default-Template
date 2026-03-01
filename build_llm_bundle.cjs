@@ -68,15 +68,25 @@ function buildCssFromStructuredStyle(styleJson) {
 }
 
 function buildCssBundle() {
-  let cssBundle = '';
-  fs.readdirSync(stylesDir).forEach((fileName) => {
-    if (!fileName.endsWith('.json')) return;
+  const cssBlocks = [];
+  const structuredOverrideBlocks = [];
+  const styleFiles = fs.readdirSync(stylesDir)
+    .filter((fileName) => fileName.endsWith('.json'))
+    .sort((a, b) => a.localeCompare(b));
+
+  styleFiles.forEach((fileName) => {
     const styleJson = readJson(path.join(stylesDir, fileName));
-    const cssFromField = typeof styleJson.css === 'string' ? styleJson.css : '';
+    if (typeof styleJson.css === 'string' && styleJson.css.trim()) {
+      cssBlocks.push(styleJson.css);
+    }
+
     const cssFromStructured = buildCssFromStructuredStyle(styleJson);
-    const mergedCss = [cssFromField, cssFromStructured].filter(Boolean).join('\n\n');
-    cssBundle += mergedCss + '\n';
+    if (cssFromStructured) {
+      structuredOverrideBlocks.push(cssFromStructured);
+    }
   });
+
+  const cssBundle = [...cssBlocks, ...structuredOverrideBlocks].join('\n\n') + '\n';
   fs.writeFileSync(outputCssPath, cssBundle);
 }
 
