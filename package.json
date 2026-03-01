@@ -8,6 +8,7 @@
     "build": "vite build",
     "validate:llm": "node validate_llm_invariants.cjs",
     "build:llm": "node harness/run_harness_gates.cjs build_llm",
+    "test:harness:bundle": "node --test harness/tests/build_llm_bundle.test.cjs",
     "test": "node harness/run_harness_gates.cjs test",
     "dev:check": "node harness/run_harness_gates.cjs dev",
     "dev:check:strict": "node harness/run_harness_gates.cjs dev --strict",

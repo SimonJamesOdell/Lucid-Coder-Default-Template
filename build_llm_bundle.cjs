@@ -49,20 +49,96 @@ function buildCssRuleFromObject(selector, declarations) {
   return `${selector} {\n${entries.join('\n')}\n}`;
 }
 
+function indentCssBlock(block, spaces = 2) {
+  const pad = ' '.repeat(spaces);
+  return String(block || '')
+    .split('\n')
+    .map((line) => (line ? `${pad}${line}` : line))
+    .join('\n');
+}
+
+function buildCssAtRuleBlock(atRule, entries) {
+  if (!atRule || !entries || typeof entries !== 'object') {
+    return '';
+  }
+
+  const nestedBlocks = Object.entries(entries)
+    .map(([nestedSelector, nestedDeclarations]) => {
+      if (!nestedDeclarations || typeof nestedDeclarations !== 'object' || Array.isArray(nestedDeclarations)) {
+        return '';
+      }
+      return buildCssRuleFromObject(nestedSelector, nestedDeclarations);
+    })
+    .filter(Boolean)
+    .map((block) => indentCssBlock(block));
+
+  if (nestedBlocks.length === 0) {
+    return '';
+  }
+
+  return `${atRule} {\n${nestedBlocks.join('\n\n')}\n}`;
+}
+
+function buildCssFromStyleEntry(entry) {
+  if (!entry || typeof entry !== 'object') {
+    return '';
+  }
+
+  const selector = typeof entry.selector === 'string' ? entry.selector.trim() : '';
+  if (!selector) {
+    return '';
+  }
+
+  const declarations =
+    (entry.rules && typeof entry.rules === 'object' && !Array.isArray(entry.rules) && entry.rules)
+    || (entry.styles && typeof entry.styles === 'object' && !Array.isArray(entry.styles) && entry.styles)
+    || (entry.properties && typeof entry.properties === 'object' && !Array.isArray(entry.properties) && entry.properties)
+    || null;
+
+  if (!declarations) {
+    return '';
+  }
+
+  if (selector.startsWith('@')) {
+    return buildCssAtRuleBlock(selector, declarations);
+  }
+
+  return buildCssRuleFromObject(selector, declarations);
+}
+
 function buildCssFromStructuredStyle(styleJson) {
   if (!styleJson || typeof styleJson !== 'object') {
     return '';
   }
 
-  if (typeof styleJson.selector === 'string' && styleJson.selector.trim() && styleJson.rules && typeof styleJson.rules === 'object') {
-    return buildCssRuleFromObject(styleJson.selector.trim(), styleJson.rules);
+  if (Array.isArray(styleJson.styles)) {
+    const entryBlocks = styleJson.styles
+      .map((entry) => buildCssFromStyleEntry(entry))
+      .filter(Boolean);
+    if (entryBlocks.length > 0) {
+      return entryBlocks.join('\n\n');
+    }
+  }
+
+  if (typeof styleJson.selector === 'string' && styleJson.selector.trim()) {
+    const selectorRuleObject =
+      (styleJson.rules && typeof styleJson.rules === 'object' && styleJson.rules)
+      || (styleJson.styles && typeof styleJson.styles === 'object' && styleJson.styles)
+      || (styleJson.properties && typeof styleJson.properties === 'object' && styleJson.properties)
+      || null;
+    if (selectorRuleObject) {
+      return buildCssRuleFromObject(styleJson.selector.trim(), selectorRuleObject);
+    }
   }
 
   const selectorEntries = Object.entries(styleJson)
-    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && key !== 'selector' && key !== 'rules' && value && typeof value === 'object');
+    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && key !== 'selector' && key !== 'rules' && key !== 'styles' && key !== 'properties' && value && typeof value === 'object');
 
   const blocks = selectorEntries
     .map(([selectorKey, declarations]) => {
+      if (selectorKey.startsWith('@')) {
+        return buildCssAtRuleBlock(selectorKey, declarations);
+      }
       const selector = selectorKey === 'body' ? 'body' : selectorKey === 'root' ? '#root' : selectorKey;
       return buildCssRuleFromObject(selector, declarations);
     })
