@@ -18,12 +18,64 @@ function componentExists(componentId) {
   return fs.existsSync(path.join(componentsDir, fileName));
 }
 
+function toKebabCase(value) {
+  return String(value || '')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+}
+
+function buildCssRuleFromObject(selector, declarations) {
+  if (!selector || !declarations || typeof declarations !== 'object') {
+    return '';
+  }
+
+  const entries = Object.entries(declarations)
+    .filter(([, value]) => value !== null && value !== undefined)
+    .map(([property, value]) => {
+      const normalizedProperty = toKebabCase(property);
+      const normalizedValue = typeof value === 'number' ? String(value) : String(value).trim();
+      if (!normalizedProperty || !normalizedValue) {
+        return null;
+      }
+      return `  ${normalizedProperty}: ${normalizedValue};`;
+    })
+    .filter(Boolean);
+
+  if (entries.length === 0) {
+    return '';
+  }
+
+  return `${selector} {\n${entries.join('\n')}\n}`;
+}
+
+function buildCssFromStructuredStyle(styleJson) {
+  if (!styleJson || typeof styleJson !== 'object') {
+    return '';
+  }
+
+  const selectorEntries = Object.entries(styleJson)
+    .filter(([key, value]) => key !== 'id' && key !== 'type' && key !== 'target' && key !== 'description' && key !== 'css' && value && typeof value === 'object');
+
+  const blocks = selectorEntries
+    .map(([selectorKey, declarations]) => {
+      const selector = selectorKey === 'body' ? 'body' : selectorKey === 'root' ? '#root' : selectorKey;
+      return buildCssRuleFromObject(selector, declarations);
+    })
+    .filter(Boolean);
+
+  return blocks.join('\n\n');
+}
+
 function buildCssBundle() {
   let cssBundle = '';
   fs.readdirSync(stylesDir).forEach((fileName) => {
     if (!fileName.endsWith('.json')) return;
     const styleJson = readJson(path.join(stylesDir, fileName));
-    cssBundle += (styleJson.css || '') + '\n';
+    const cssFromField = typeof styleJson.css === 'string' ? styleJson.css : '';
+    const cssFromStructured = buildCssFromStructuredStyle(styleJson);
+    const mergedCss = [cssFromField, cssFromStructured].filter(Boolean).join('\n\n');
+    cssBundle += mergedCss + '\n';
   });
   fs.writeFileSync(outputCssPath, cssBundle);
 }
